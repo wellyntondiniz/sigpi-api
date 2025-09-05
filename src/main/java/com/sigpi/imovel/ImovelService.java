@@ -15,4 +15,18 @@ public class ImovelService {
 		return imovelRepository.findAll();
 	}
 	
+	public Imovel buscarPorId(Integer id){
+		return imovelRepository.findById(id).get();
+	}
+	
+	public Imovel salvar(Imovel imovel) {
+		return imovelRepository.save(imovel);
+	}
+	
+	public void deletar(Integer id) {
+		Imovel imovel = imovelRepository.findById(id).get();
+		
+		imovelRepository.delete(imovel);
+	}
+	
 }
