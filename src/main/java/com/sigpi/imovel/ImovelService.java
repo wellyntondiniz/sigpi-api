@@ -8,9 +8,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class ImovelService {
 	
-	@Autowired
 	private ImovelRepository imovelRepository;
 	
+	public ImovelService(ImovelRepository imovelRepository) {
+		super();
+		this.imovelRepository = imovelRepository;
+	}
+
 	public List<Imovel> listarTodas(){
 		return imovelRepository.findAll();
 	}
@@ -24,7 +28,8 @@ public class ImovelService {
 	}
 	
 	public void deletar(Integer id) {
-		Imovel imovel = imovelRepository.findById(id).get();
+		Imovel imovel = imovelRepository.findById(id)
+				.orElseThrow(() -> new RuntimeException("Imóvel inexistente"));
 		
 		imovelRepository.delete(imovel);
 	}
