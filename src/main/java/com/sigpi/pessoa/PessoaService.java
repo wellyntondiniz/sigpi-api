@@ -15,6 +15,9 @@ public class PessoaService {
 		return pessoaRepository.findAll(); 
 	}
 	
+	public Pessoa getById(Integer id) {
+		return pessoaRepository.getById(id);
+	}
 	
 
 }

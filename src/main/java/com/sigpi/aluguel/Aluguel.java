@@ -22,15 +22,11 @@ public class Aluguel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@ManyToOne
-	@JoinColumn(name = "proprietario_id")
-	@JsonBackReference
-	private Pessoa propritario;
+	@Column(name = "proprietario_id")
+	private Integer propritario;
 
-	@ManyToOne
-	@JoinColumn(name = "inquilino_id")
-	@JsonBackReference
-	private Pessoa inquilino;
+	@Column(name = "inquilino_id")
+	private Integer inquilino;
 
 	@Column(name = "data_inicio")
 	private Date data_inicio;
@@ -47,22 +43,6 @@ public class Aluguel {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public Pessoa getPropritario() {
-		return propritario;
-	}
-
-	public void setPropritario(Pessoa propritario) {
-		this.propritario = propritario;
-	}
-
-	public Pessoa getInquilino() {
-		return inquilino;
-	}
-
-	public void setInquilino(Pessoa inquilino) {
-		this.inquilino = inquilino;
 	}
 
 	public Date getData_inicio() {

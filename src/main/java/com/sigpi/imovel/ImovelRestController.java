@@ -24,6 +24,11 @@ public class ImovelRestController {
 		return imovelService.listarTodas();
 	}
 	
+	@GetMapping("/disponiveis")
+	public List<Imovel> buscarTodasDisponiveis() {
+		return imovelService.listarTodas();
+	}
+	
 	@GetMapping("/{id}")
 	public Imovel buscarPorId(@PathVariable("id") Integer id) {
 		return imovelService.buscarPorId(id);
