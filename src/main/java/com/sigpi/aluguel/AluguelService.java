@@ -1,13 +1,14 @@
 package com.sigpi.aluguel;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import com.sigpi.pessoa.Pessoa;
-import com.sigpi.pessoa.PessoaService;
+import com.sigpi.parcelas.ParcelasDTO;
+import com.sigpi.parcelas.ParcelasService;
 
 @Service
 public class AluguelService {
@@ -16,10 +17,33 @@ public class AluguelService {
 	private AluguelRepository aluguelRepository;
 	
 	@Autowired
-	private PessoaService pessoaService;
+	private ParcelasService parcelasService;
 	
-	public List<Aluguel> listarTodas() {		
-		return aluguelRepository.findAll();
+	public List<AluguelDTO> listarTodas() {			
+		return converterAluguelDTO(aluguelRepository.findAll());
+	}
+	
+	private List<AluguelDTO> converterAluguelDTO(List<Aluguel> listaAluguel) {
+		List<AluguelDTO> listaAluguelDTO = new ArrayList<>();
+		
+		listaAluguel.forEach(aluguel -> {
+			listaAluguelDTO.add(converterAluguelDTO(aluguel));			
+		});
+		
+		return listaAluguelDTO;
+	}
+	
+	private AluguelDTO converterAluguelDTO(Aluguel aluguel) {
+		AluguelDTO aluguelDTO = new AluguelDTO();
+		aluguelDTO.setId(aluguel.getId());
+		aluguelDTO.setProprietarioId(aluguel.getPropritario());
+		aluguelDTO.setInquilinoId(aluguel.getInquilino());
+		aluguelDTO.setImovelId(aluguel.getImovel());
+		aluguelDTO.setDataInicio(aluguel.getData_inicio());
+		aluguelDTO.setDiaCobranca(aluguel.getDia_cobranca());
+		aluguelDTO.setMesesDuracao(aluguel.getMeses_duracao());
+		aluguelDTO.setParcelas(parcelasService.getParcelas(aluguel.getId()));
+		return aluguelDTO;
 	}
 	
 	public AluguelDTO alugar(AluguelDTO aluguelDTO) {
@@ -29,21 +53,23 @@ public class AluguelService {
 		Aluguel aluguel = new Aluguel();
 		aluguel.setData_inicio(aluguelDTO.getDataInicio());
 		aluguel.setDia_cobranca(aluguelDTO.getDiaCobranca());
+		aluguel.setInquilino(aluguelDTO.getInquilinoId());
+		aluguel.setPropritario(aluguelDTO.getProprietarioId());
+		aluguel.setMeses_duracao(aluguelDTO.getMesesDuracao());
+		aluguel.setImovel(aluguelDTO.getImovelId());
+		aluguelRepository.save(aluguel);	
+		parcelasService.gerarParcelas(aluguel);
 		
-		Pessoa inquilino = pessoaService.getById(aluguelDTO.getInquilinoId());
-		aluguel.setInquilino(inquilino);
-		
-		Pessoa proprietario = pessoaService.getById(null);
-		aluguel.setPropritario(proprietario);
-		
-		aluguelRepository.save(aluguel);
-		
-		return aluguelDTO;
+		return converterAluguelDTO(aluguel);
 	}
 	
 	private void validarAluguel(AluguelDTO aluguel) {
 		if (aluguel.getProprietarioId() == null) {
 			throw new RuntimeException("Informe o proprietário.");
+		}
+		
+		if (aluguel.getImovelId() == null) {
+			throw new RuntimeException("Informe o imovel.");
 		}
 		
 		if (aluguel.getInquilinoId() == null) {

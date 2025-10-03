@@ -18,6 +18,10 @@ public class PessoaService {
 	public Pessoa getById(Integer id) {
 		return pessoaRepository.getById(id);
 	}
+
+	public Pessoa salvar(Pessoa pessoa) {
+		return pessoaRepository.save(pessoa);
+	}
 	
 
 }

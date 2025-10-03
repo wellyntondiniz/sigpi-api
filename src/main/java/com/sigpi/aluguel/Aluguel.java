@@ -1,6 +1,7 @@
 package com.sigpi.aluguel;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.sigpi.pessoa.Pessoa;
@@ -22,6 +23,9 @@ public class Aluguel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@Column(name = "imovel_id")
+	private Integer imovel;
+	
 	@Column(name = "proprietario_id")
 	private Integer propritario;
 
@@ -29,7 +33,7 @@ public class Aluguel {
 	private Integer inquilino;
 
 	@Column(name = "data_inicio")
-	private Date data_inicio;
+	private LocalDate data_inicio;
 
 	@Column(name = "dia_cobranca")
 	private Integer dia_cobranca;
@@ -45,11 +49,27 @@ public class Aluguel {
 		this.id = id;
 	}
 
-	public Date getData_inicio() {
+	public Integer getPropritario() {
+		return propritario;
+	}
+
+	public void setPropritario(Integer propritario) {
+		this.propritario = propritario;
+	}
+
+	public Integer getInquilino() {
+		return inquilino;
+	}
+
+	public void setInquilino(Integer inquilino) {
+		this.inquilino = inquilino;
+	}
+
+	public LocalDate getData_inicio() {
 		return data_inicio;
 	}
 
-	public void setData_inicio(Date data_inicio) {
+	public void setData_inicio(LocalDate data_inicio) {
 		this.data_inicio = data_inicio;
 	}
 
@@ -68,8 +88,14 @@ public class Aluguel {
 	public void setMeses_duracao(Integer meses_duracao) {
 		this.meses_duracao = meses_duracao;
 	}
-	
-	
-	
+
+	public Integer getImovel() {
+		return imovel;
+	}
+
+	public void setImovel(Integer imovel) {
+		this.imovel = imovel;
+	}
+
 	
 }

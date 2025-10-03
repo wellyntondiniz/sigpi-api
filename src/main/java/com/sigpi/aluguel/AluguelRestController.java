@@ -17,7 +17,7 @@ public class AluguelRestController {
 	AluguelService aluguelService;
 	
 	@GetMapping
-	public List<Aluguel> buscarTodas() {
+	public List<AluguelDTO> buscarTodas() {
 		return aluguelService.listarTodas();
 	}
 	

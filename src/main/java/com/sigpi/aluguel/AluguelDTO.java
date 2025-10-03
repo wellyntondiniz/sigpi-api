@@ -1,6 +1,10 @@
 package com.sigpi.aluguel;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.List;
+
+import com.sigpi.parcelas.ParcelasDTO;
 
 
 
@@ -11,11 +15,15 @@ public class AluguelDTO {
 	
 	private Integer inquilinoId;
 	
-	private Date dataInicio;
+	private Integer imovelId;
+	
+	private LocalDate dataInicio;
 	
 	private Integer diaCobranca;
 	
 	private Integer mesesDuracao;
+	
+	private List<ParcelasDTO> parcelas;
 
 	public Integer getProprietarioId() {
 		return proprietarioId;
@@ -33,11 +41,11 @@ public class AluguelDTO {
 		this.inquilinoId = inquilinoId;
 	}
 
-	public Date getDataInicio() {
+	public LocalDate getDataInicio() {
 		return dataInicio;
 	}
 
-	public void setDataInicio(Date dataInicio) {
+	public void setDataInicio(LocalDate dataInicio) {
 		this.dataInicio = dataInicio;
 	}
 
@@ -64,5 +72,23 @@ public class AluguelDTO {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+	public List<ParcelasDTO> getParcelas() {
+		return parcelas;
+	}
+
+	public void setParcelas(List<ParcelasDTO> parcelas) {
+		this.parcelas = parcelas;
+	}
+
+	public Integer getImovelId() {
+		return imovelId;
+	}
+
+	public void setImovelId(Integer imovelId) {
+		this.imovelId = imovelId;
+	}
+	
+	
 	
 }
