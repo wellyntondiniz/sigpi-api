@@ -23,8 +23,9 @@ public class ImovelService {
 		return imovelRepository.findById(id).get();
 	}
 	
-	public Imovel salvar(Imovel imovel) {
-		return imovelRepository.save(imovel);
+	public Imovel salvar(ImovelRequest req) {
+		//return imovelRepository.save(imovel);
+		return null;
 	}
 	
 	public void deletar(Integer id) {

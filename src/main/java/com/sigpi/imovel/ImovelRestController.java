@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
@@ -36,10 +38,10 @@ public class ImovelRestController {
 		return imovelService.buscarPorId(id);
 	}
 	
-	@PostMapping
-	public Imovel salvar(@RequestBody Imovel imovel) {
-		return imovelService.salvar(imovel);
-	}
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Imovel salvar(@RequestBody ImovelRequest req) {
+        return imovelService.salvar(req);
+    }
 	
 	@DeleteMapping("/{id}")
 	public void deletar(@PathVariable("id") Integer id) {
