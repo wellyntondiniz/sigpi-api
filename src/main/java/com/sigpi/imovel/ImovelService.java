@@ -1,6 +1,7 @@
 package com.sigpi.imovel;
 
 import java.util.List;
+import org.springframework.util.StringUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,9 +25,31 @@ public class ImovelService {
 	}
 	
 	public Imovel salvar(ImovelRequest req) {
-		//return imovelRepository.save(imovel);
-		return null;
+        Imovel entity = new Imovel();
+        entity.setDescricao(req.descricao());
+        entity.setRua(req.rua());
+        entity.setNumero(req.numero());
+        entity.setBairro(req.bairro());
+        entity.setCidade(req.cidade());
+        entity.setCep(req.cep());
+
+        if (StringUtils.hasText(req.fotoBase64())) {
+            entity.setFoto(sanitizeBase64(req.fotoBase64()));
+        }
+
+        return imovelRepository.save(entity);
 	}
+	
+    private String sanitizeBase64(String base64) {
+        String b64 = base64.trim();
+        int idx = b64.indexOf(","); 
+        if (b64.startsWith("data:") && idx > 0) {
+            b64 = b64.substring(idx + 1);
+        }
+
+        b64 = b64.replaceAll("\\s", "");
+        return b64;
+    }
 	
 	public void deletar(Integer id) {
 		Imovel imovel = imovelRepository.findById(id)

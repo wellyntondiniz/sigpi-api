@@ -12,7 +12,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.validation.Valid;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
@@ -38,9 +43,12 @@ public class ImovelRestController {
 		return imovelService.buscarPorId(id);
 	}
 	
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Imovel salvar(@RequestBody ImovelRequest req) {
-        return imovelService.salvar(req);
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ImovelResponse> salvar(@Valid @RequestBody ImovelRequest req) {
+        Imovel saved = imovelService.salvar(req);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(ImovelResponse.from(saved));
     }
 	
 	@DeleteMapping("/{id}")

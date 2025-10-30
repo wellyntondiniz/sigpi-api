@@ -33,7 +33,7 @@ public class Imovel {
 	@Column(name = "cep")
     private String cep;
 	
-	@Column(name = "foto")
+	@Column(name = "foto", columnDefinition = "LONGTEXT")
     private String foto;
 
 	public Integer getId() {

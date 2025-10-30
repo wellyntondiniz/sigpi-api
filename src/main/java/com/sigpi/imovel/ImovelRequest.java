@@ -7,5 +7,10 @@ public record ImovelRequest(
         Boolean disponivel,
         String fotoBase64,       
         String fotoContentType,  
-        String fotoNome          
+        String fotoNome,     
+        String rua,
+        Integer numero,
+        String bairro,
+        String cidade,
+        String cep
 ) {}
