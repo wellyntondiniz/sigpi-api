@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sigpi.imovel.Imovel;
 import com.sigpi.parcelas.ParcelasDTO;
 import com.sigpi.parcelas.ParcelasService;
 
@@ -21,6 +22,10 @@ public class AluguelService {
 	
 	public List<AluguelDTO> listarTodas() {			
 		return converterAluguelDTO(aluguelRepository.findAll());
+	}
+	
+	public Aluguel buscarPorId(Integer id){
+		return aluguelRepository.findById(id).get();
 	}
 	
 	private List<AluguelDTO> converterAluguelDTO(List<Aluguel> listaAluguel) {

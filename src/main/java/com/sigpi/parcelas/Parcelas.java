@@ -1,5 +1,6 @@
 package com.sigpi.parcelas;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -29,6 +30,9 @@ public class Parcelas {
 
     @Column(name = "situacao")
     private Integer situacao;
+    
+    @Column(name = "valor")
+    private BigDecimal valor;
 
 	public Integer getId() {
 		return id;
@@ -68,6 +72,14 @@ public class Parcelas {
 
 	public void setSituacao(Integer situacao) {
 		this.situacao = situacao;
+	}
+
+	public BigDecimal getValor() {
+		return valor;
+	}
+
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
 	}
     
     

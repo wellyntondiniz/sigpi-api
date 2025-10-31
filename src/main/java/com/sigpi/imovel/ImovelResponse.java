@@ -8,7 +8,7 @@ public record ImovelResponse(
         String bairro,
         String cidade,
         String cep,
-        String foto // pode ser base64, URL, etc.
+        String foto 
 ) {
     public static ImovelResponse from(Imovel e) {
         return new ImovelResponse(

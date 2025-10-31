@@ -1,6 +1,9 @@
 package com.sigpi.parcelas;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import com.sigpi.imovel.Imovel;
 
 public class ParcelasDTO {
     
@@ -14,6 +17,10 @@ public class ParcelasDTO {
 
     private String situacao;
 
+    private Imovel imovel;
+    
+    private BigDecimal valor;
+    
 	public Integer getId() {
 		return id;
 	}
@@ -53,4 +60,23 @@ public class ParcelasDTO {
 	public void setSituacao(String situacao) {
 		this.situacao = situacao;
 	}
+
+	public Imovel getImovel() {
+		return imovel;
+	}
+
+	public void setImovel(Imovel imovel) {
+		this.imovel = imovel;
+	}
+
+	public BigDecimal getValor() {
+		return valor;
+	}
+
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
+	
+	
+	
 }

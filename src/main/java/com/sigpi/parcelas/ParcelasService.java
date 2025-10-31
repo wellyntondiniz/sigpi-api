@@ -52,7 +52,12 @@ public class ParcelasService {
 			parcelaDTO.setDataVencimento(parcela.getDataVencimento());
 			parcelaDTO.setNumeroParcela(parcela.getNumeroParcela());
 			parcelaDTO.setSituacao(parcela.getSituacao().equals(1) ? "Aguardando pagamento" : "Paga");
-		
+			parcelaDTO.setValor(parcela.getValor());
+			
+			//Aluguel aluguel = aluguelService.buscarPorId(parcela.getAluguel_id());
+			//Imovel imovel = imovelService.buscarPorId(aluguel.getImovel());
+			
+			//parcelaDTO.setImovel(imovel);
 			parcelasDTO.add(parcelaDTO);
 		});
 		
@@ -60,6 +65,10 @@ public class ParcelasService {
 	}
 
 	public List<ParcelasDTO> getParcelas(Integer id) {
+		return converterParcelasDTO(parcelasRepository.findAll());
+	}
+
+	public List<ParcelasDTO> listarVencimento() {
 		return converterParcelasDTO(parcelasRepository.findAll());
 	}
 
